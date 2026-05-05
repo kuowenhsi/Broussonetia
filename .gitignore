@@ -1,0 +1,19 @@
+.DS_Store
+
+# Local R package cache; packages are restored with install.packages().
+R_libs/
+
+# Large raw genomics files. Keep these locally or move to Git LFS/object storage.
+*.fa
+*.fasta
+*.hic
+*.matrix
+*.assembly
+*.pptx
+*.pdf
+VCF/*.vcf
+VCF/*.vcf.gz
+
+# Keep lightweight indexes and generated analysis outputs versioned.
+!VCF/*.csi
+!genome_AS/*.fai

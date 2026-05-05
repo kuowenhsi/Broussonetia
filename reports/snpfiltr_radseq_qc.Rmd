@@ -1,0 +1,544 @@
+---
+title: "Broussonetia RADseq SNPfiltR QC"
+subtitle: "Exploratory plots for choosing the next SNP filtering conditions"
+author: "Generated with SNPfiltR"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: readable
+    df_print: paged
+params:
+  vcf_file: "../VCF/Broussonetia_RADseq.07_tags_refilled.vcf.gz"
+  metadata_file: "../PRJNA437223_Broussonetia_meta.csv"
+  pop_column: "geo_loc_name_country"
+  run_structure_plots: true
+  structure_snp_limit: 20000
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 9,
+  fig.height = 6,
+  dpi = 120
+)
+
+local_lib <- normalizePath(file.path("..", "R_libs"), mustWork = FALSE)
+if (dir.exists(local_lib)) {
+  .libPaths(c(local_lib, .libPaths()))
+}
+
+library(SNPfiltR)
+library(vcfR)
+library(tidyverse)
+library(DT)
+library(patchwork)
+library(scales)
+
+theme_set(theme_bw(base_size = 12))
+set.seed(20260505)
+```
+
+# Goal
+
+This report uses the SNPfiltR workflow as an exploratory RADseq filtering guide. The goal is not to create a final filtered VCF in this pass. Instead, it visualizes the main quality axes that usually drive RADseq SNP filtering decisions:
+
+* missing data by SNP and by sample,
+* per-sample depth and per-SNP depth,
+* genotype depth and genotype quality,
+* heterozygote allele balance,
+* biallelic status,
+* minor allele count,
+* distance thinning for linked SNPs,
+* PCA and t-SNE behavior under missing-data thresholds.
+
+The VCF is `r params$vcf_file`. The metadata file is `r params$metadata_file`, and population colors use `r params$pop_column`.
+
+# Load Data
+
+```{r load-data}
+vcf_path <- normalizePath(params$vcf_file)
+metadata_path <- normalizePath(params$metadata_file)
+
+vcf <- read.vcfR(vcf_path, verbose = FALSE)
+vcf@gt[, -1] <- gsub("^([0-9.])\\|([0-9.])", "\\1/\\2", vcf@gt[, -1])
+metadata <- read.csv(metadata_path, check.names = FALSE)
+
+sample_ids <- colnames(vcf@gt)[-1]
+popmap <- metadata |>
+  transmute(
+    id = Run,
+    pop = .data[[params$pop_column]],
+    organism = Organism,
+    sample_name = `Sample Name`,
+    locality = geo_loc_name,
+    haplotype = haplotype
+  ) |>
+  filter(id %in% sample_ids) |>
+  mutate(pop = if_else(is.na(pop) | pop == "", "missing", pop)) |>
+  arrange(match(id, sample_ids))
+
+stopifnot(identical(popmap$id, sample_ids))
+
+vcf_summary <- tibble(
+  metric = c("variants", "samples", "scaffolds", "metadata rows matched"),
+  value = c(
+    nrow(vcf@fix),
+    length(sample_ids),
+    n_distinct(vcf@fix[, "CHROM"]),
+    nrow(popmap)
+  )
+)
+
+datatable(vcf_summary, rownames = FALSE, options = list(dom = "t"))
+```
+
+The metadata match check is strict: every VCF sample must appear in the metadata, and the report stops if the order cannot be aligned.
+
+```{r metadata-plots}
+p_country <- popmap |>
+  count(pop, sort = TRUE) |>
+  ggplot(aes(x = reorder(pop, n), y = n)) +
+  geom_col(fill = "#4C78A8") +
+  coord_flip() +
+  labs(x = NULL, y = "Samples", title = "Samples by metadata country")
+
+p_organism <- popmap |>
+  count(organism, sort = TRUE) |>
+  ggplot(aes(x = reorder(organism, n), y = n)) +
+  geom_col(fill = "#59A14F") +
+  coord_flip() +
+  labs(x = NULL, y = "Samples", title = "Samples by organism")
+
+p_country + p_organism
+```
+
+# Genotype Matrices Used For Parameter Summaries
+
+```{r extracted-fields}
+gt <- extract.gt(vcf, element = "GT", as.numeric = FALSE)
+dp <- extract.gt(vcf, element = "DP", as.numeric = TRUE)
+gq <- extract.gt(vcf, element = "GQ", as.numeric = TRUE)
+ad <- extract.gt(vcf, element = "AD", as.numeric = FALSE)
+
+called <- !is.na(gt) & !gt %in% c("./.", ".|.", ".")
+variant_missing <- rowMeans(!called)
+sample_missing <- colMeans(!called)
+sample_mean_depth <- colMeans(dp, na.rm = TRUE)
+variant_mean_depth <- rowMeans(dp, na.rm = TRUE)
+
+field_summary <- tibble(
+  field = c("GT", "DP", "GQ", "AD"),
+  non_missing_cells = c(sum(!is.na(gt)), sum(!is.na(dp)), sum(!is.na(gq)), sum(!is.na(ad))),
+  total_cells = length(gt),
+  proportion_non_missing = non_missing_cells / total_cells
+)
+
+datatable(field_summary, rownames = FALSE, options = list(pageLength = 4, dom = "t"))
+```
+
+# Missing Data By SNP
+
+SNPfiltR recommends first viewing how many SNPs are retained and how total missingness changes across missing-data cutoffs. Lower cutoffs produce more complete matrices but discard more loci; higher cutoffs retain more loci but may leave sparse genotype patterns.
+
+```{r snpfiltr-missing-by-snp}
+missing_snp_tbl <- missing_by_snp(vcf)
+datatable(missing_snp_tbl, rownames = FALSE, options = list(pageLength = 10))
+```
+
+```{r custom-missing-by-snp}
+candidate_snp_missing <- seq(0.3, 0.9, by = 0.05)
+missing_snp_grid <- tibble(cutoff = candidate_snp_missing) |>
+  mutate(
+    snps_retained = map_int(cutoff, ~ sum(variant_missing <= .x)),
+    percent_retained = snps_retained / nrow(vcf@fix),
+    mean_missing_after = map_dbl(cutoff, ~ mean(variant_missing[variant_missing <= .x]))
+  )
+
+p_retained <- missing_snp_grid |>
+  ggplot(aes(cutoff, snps_retained)) +
+  geom_line(color = "#4C78A8", linewidth = 0.9) +
+  geom_point(color = "#4C78A8") +
+  scale_y_continuous(labels = comma) +
+  labs(x = "Maximum missingness allowed per SNP", y = "SNPs retained")
+
+p_missing <- missing_snp_grid |>
+  ggplot(aes(cutoff, mean_missing_after)) +
+  geom_line(color = "#E15759", linewidth = 0.9) +
+  geom_point(color = "#E15759") +
+  scale_y_continuous(labels = percent) +
+  labs(x = "Maximum missingness allowed per SNP", y = "Mean missingness after filter")
+
+p_retained + p_missing
+```
+
+# Missing Data By Sample
+
+Samples with very high missingness often cannot be rescued by SNP-level missingness filters. For RADseq, this is usually one of the most important early decisions.
+
+```{r snpfiltr-missing-by-sample}
+missing_sample_obj <- missing_by_sample(vcf, popmap = popmap[, c("id", "pop")])
+sample_qc <- as_tibble(missing_sample_obj$unfiltered.stats, rownames = "id") |>
+  select(id, prop.missing, mean.depth) |>
+  left_join(popmap, by = "id") |>
+  arrange(desc(prop.missing))
+
+datatable(sample_qc, rownames = FALSE, options = list(pageLength = 15))
+```
+
+```{r custom-sample-missing-plots}
+p_sample_missing <- sample_qc |>
+  mutate(id = fct_reorder(id, prop.missing)) |>
+  ggplot(aes(id, prop.missing, color = pop)) +
+  geom_point(size = 2.2, alpha = 0.85) +
+  geom_hline(yintercept = c(0.5, 0.7, 0.8, 0.9), linetype = "dashed", color = "grey45") +
+  coord_flip() +
+  scale_y_continuous(labels = percent) +
+  labs(x = NULL, y = "Missing genotypes", color = params$pop_column)
+
+p_depth_missing <- sample_qc |>
+  ggplot(aes(mean.depth, prop.missing, color = pop)) +
+  geom_point(size = 2.4, alpha = 0.85) +
+  scale_y_continuous(labels = percent) +
+  labs(x = "Mean sample depth", y = "Missing genotypes", color = params$pop_column)
+
+p_sample_missing / p_depth_missing + plot_layout(heights = c(2, 1))
+```
+
+```{r sample-threshold-table}
+sample_cutoffs <- c(0.5, 0.6, 0.7, 0.8, 0.9)
+sample_threshold_tbl <- tibble(max_sample_missing = sample_cutoffs) |>
+  mutate(
+    samples_retained = map_int(max_sample_missing, ~ sum(sample_missing <= .x)),
+    samples_removed = length(sample_ids) - samples_retained
+  )
+
+datatable(sample_threshold_tbl, rownames = FALSE, options = list(dom = "t"))
+```
+
+# Depth And Genotype Quality
+
+Classic RADseq hard filtering usually removes individual genotype calls below a minimum depth and genotype quality. The heatmap below shows how much missingness would be introduced by common depth and GQ thresholds.
+
+```{r depth-gq-grid}
+depth_grid <- c(3, 5, 8, 10)
+gq_grid <- c(10, 20, 30, 40)
+
+hard_filter_grid <- crossing(min_depth = depth_grid, min_gq = gq_grid) |>
+  mutate(
+    callable_cells = map2_int(min_depth, min_gq, ~ sum(called & dp >= .x & gq >= .y, na.rm = TRUE)),
+    total_called_before = sum(called),
+    retained_called_fraction = callable_cells / total_called_before,
+    total_matrix_missing_after = 1 - callable_cells / length(called)
+  )
+
+datatable(hard_filter_grid, rownames = FALSE, options = list(pageLength = 16, dom = "t"))
+```
+
+```{r depth-gq-plot}
+hard_filter_grid |>
+  ggplot(aes(factor(min_depth), factor(min_gq), fill = retained_called_fraction)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = percent(retained_called_fraction, accuracy = 0.1)), size = 3.5) +
+  scale_fill_viridis_c(labels = percent, option = "C", direction = -1) +
+  labs(
+    x = "Minimum genotype depth",
+    y = "Minimum genotype quality",
+    fill = "Called genotypes retained",
+    title = "Retention of currently called genotypes under hard-filter candidates"
+  )
+```
+
+```{r depth-distributions}
+depth_df <- tibble(
+  variant_mean_depth = variant_mean_depth,
+  variant_missing = variant_missing
+) |>
+  filter(is.finite(variant_mean_depth))
+
+p_variant_depth <- depth_df |>
+  ggplot(aes(variant_mean_depth)) +
+  geom_histogram(bins = 100, fill = "#4C78A8", color = "white") +
+  scale_x_continuous(labels = comma) +
+  labs(x = "Mean depth per SNP", y = "SNPs", title = "Per-SNP mean depth")
+
+p_variant_depth_zoom <- depth_df |>
+  filter(variant_mean_depth <= quantile(variant_mean_depth, 0.99, na.rm = TRUE)) |>
+  ggplot(aes(variant_mean_depth)) +
+  geom_histogram(bins = 80, fill = "#F28E2B", color = "white") +
+  labs(x = "Mean depth per SNP, <= 99th percentile", y = "SNPs", title = "Zoomed depth distribution")
+
+p_variant_depth + p_variant_depth_zoom
+```
+
+```{r snpfiltr-max-depth}
+max_depth(vcf)
+
+depth_threshold_tbl <- tibble(
+  rule = c("95th percentile", "97.5th percentile", "99th percentile", "mean + 2 sd", "mean + 3 sd"),
+  max_mean_depth = c(
+    quantile(variant_mean_depth, 0.95, na.rm = TRUE),
+    quantile(variant_mean_depth, 0.975, na.rm = TRUE),
+    quantile(variant_mean_depth, 0.99, na.rm = TRUE),
+    mean(variant_mean_depth, na.rm = TRUE) + 2 * sd(variant_mean_depth, na.rm = TRUE),
+    mean(variant_mean_depth, na.rm = TRUE) + 3 * sd(variant_mean_depth, na.rm = TRUE)
+  )
+) |>
+  mutate(snps_retained = map_int(max_mean_depth, ~ sum(variant_mean_depth <= .x, na.rm = TRUE)))
+
+datatable(depth_threshold_tbl, rownames = FALSE, options = list(dom = "t"))
+```
+
+# Allele Balance
+
+For called heterozygotes in a diploid RADseq dataset, the reference allele fraction should center near 0.5. Extreme values can reflect allele dropout, mismapping, paralogy, or low-depth genotypes.
+
+```{r allele-balance}
+het <- gt %in% c("0/1", "1/0", "0|1", "1|0")
+ad_parts <- str_split_fixed(as.vector(ad), ",", 2)
+ref_depth <- suppressWarnings(as.numeric(ad_parts[, 1]))
+alt_depth <- suppressWarnings(as.numeric(ad_parts[, 2]))
+ab <- ref_depth / (ref_depth + alt_depth)
+ab_het <- ab[as.vector(het) & is.finite(ab)]
+
+ab_tbl <- tibble(ref_allele_fraction = ab_het) |>
+  mutate(
+    pass_25_75 = between(ref_allele_fraction, 0.25, 0.75),
+    pass_30_70 = between(ref_allele_fraction, 0.30, 0.70),
+    pass_20_80 = between(ref_allele_fraction, 0.20, 0.80)
+  )
+
+tibble(
+  filter = c("0.20-0.80", "0.25-0.75", "0.30-0.70"),
+  heterozygotes_retained = c(sum(ab_tbl$pass_20_80), sum(ab_tbl$pass_25_75), sum(ab_tbl$pass_30_70)),
+  heterozygotes_total = nrow(ab_tbl)
+) |>
+  mutate(retained_fraction = heterozygotes_retained / heterozygotes_total) |>
+  datatable(rownames = FALSE, options = list(dom = "t"))
+```
+
+```{r allele-balance-plot}
+ggplot(ab_tbl, aes(ref_allele_fraction)) +
+  geom_histogram(bins = 80, fill = "#59A14F", color = "white") +
+  geom_vline(xintercept = c(0.25, 0.75), linetype = "dashed", color = "#E15759") +
+  geom_vline(xintercept = c(0.30, 0.70), linetype = "dotted", color = "#B07AA1") +
+  labs(
+    x = "Reference allele fraction in called heterozygotes",
+    y = "Heterozygote genotype calls",
+    title = "Allele balance distribution"
+  )
+```
+
+SNPfiltR's default allele balance filter is 0.25-0.75 when no explicit ratio is supplied. The chunk below runs that default once as a check and reports the resulting missingness.
+
+```{r snpfiltr-allele-balance-check}
+vcf_ab_default <- filter_allele_balance(vcf)
+gt_ab_default <- extract.gt(vcf_ab_default, element = "GT", as.numeric = FALSE)
+tibble(
+  filter = "SNPfiltR default allele balance 0.25-0.75",
+  missing_before = mean(!called),
+  missing_after = mean(is.na(gt_ab_default) | gt_ab_default %in% c("./.", ".|.", "."))
+) |>
+  datatable(rownames = FALSE, options = list(dom = "t"))
+```
+
+# Biallelic SNPs And Minor Allele Count
+
+Most downstream population-genetic programs expect biallelic SNPs. Minor allele count then controls singleton/doubleton retention and helps remove invariant sites that may appear after sample filtering.
+
+```{r biallelic-summary}
+biallelic <- !str_detect(vcf@fix[, "ALT"], ",")
+tibble(
+  category = c("biallelic", "multiallelic"),
+  snps = c(sum(biallelic), sum(!biallelic))
+) |>
+  mutate(percent = snps / sum(snps)) |>
+  datatable(rownames = FALSE, options = list(dom = "t"))
+```
+
+```{r snpfiltr-min-mac}
+min_mac(vcf)
+```
+
+```{r mac-candidate-table}
+gt_numeric <- gt
+gt_numeric[gt_numeric %in% c("0/0", "0|0")] <- "0"
+gt_numeric[gt_numeric %in% c("0/1", "1/0", "0|1", "1|0")] <- "1"
+gt_numeric[gt_numeric %in% c("1/1", "1|1")] <- "2"
+alt_counts <- rowSums(matrix(as.numeric(gt_numeric), nrow = nrow(gt_numeric)), na.rm = TRUE)
+alleles_called <- 2 * rowSums(called)
+minor_allele_count <- pmin(alt_counts, alleles_called - alt_counts)
+
+mac_cutoffs <- c(1, 2, 3, 5, 10)
+mac_tbl <- tibble(min_mac = mac_cutoffs) |>
+  mutate(snps_retained = map_int(min_mac, ~ sum(minor_allele_count >= .x, na.rm = TRUE)))
+
+datatable(mac_tbl, rownames = FALSE, options = list(dom = "t"))
+```
+
+# Distance Thinning
+
+RADseq loci can include linked SNPs on the same assembled tag or scaffold. Distance thinning is especially useful before analyses that assume weak linkage, such as STRUCTURE-like clustering.
+
+```{r distance-thinning}
+thin_one <- function(chrom, pos, min_distance) {
+  keep <- logical(length(pos))
+  last_pos <- -Inf
+  for (i in seq_along(pos)) {
+    if (pos[i] - last_pos > min_distance) {
+      keep[i] <- TRUE
+      last_pos <- pos[i]
+    }
+  }
+  keep
+}
+
+pos_tbl <- tibble(
+  chrom = vcf@fix[, "CHROM"],
+  pos = as.integer(vcf@fix[, "POS"]),
+  row_id = seq_len(nrow(vcf@fix))
+) |>
+  arrange(chrom, pos)
+
+distance_tbl <- tibble(min_distance_bp = c(100, 250, 500, 1000, 5000, 10000)) |>
+  mutate(
+    snps_retained = map_int(min_distance_bp, function(d) {
+      pos_tbl |>
+        group_by(chrom) |>
+        summarise(retained = sum(thin_one(chrom, pos, d)), .groups = "drop") |>
+        summarise(total = sum(retained), .groups = "drop") |>
+        pull(total)
+    }),
+    percent_retained = snps_retained / nrow(vcf@fix)
+  )
+
+datatable(distance_tbl, rownames = FALSE, options = list(dom = "t"))
+```
+
+```{r distance-plot}
+distance_tbl |>
+  ggplot(aes(min_distance_bp, snps_retained)) +
+  geom_line(color = "#4C78A8", linewidth = 0.9) +
+  geom_point(color = "#4C78A8", size = 2.5) +
+  scale_x_continuous(labels = comma) +
+  scale_y_continuous(labels = comma) +
+  labs(x = "Minimum distance between retained SNPs (bp)", y = "SNPs retained")
+```
+
+# Missingness And Structure Plots
+
+PCA and t-SNE are used here as diagnostics: do clustering patterns stay stable as missing-data thresholds change, or do they shift sharply when the data matrix becomes sparser?
+
+To keep this report practical, the structure diagnostics use at most `r params$structure_snp_limit` SNPs after a light exploratory prefilter. The SNP subset is deterministic because the random seed is fixed in the setup chunk.
+
+```{r structure-prefilter}
+structure_keep_samples <- sample_qc |>
+  filter(prop.missing <= 0.8) |>
+  pull(id)
+
+structure_keep_snps <- which(variant_missing <= 0.8 & minor_allele_count >= 1 & biallelic)
+if (length(structure_keep_snps) > params$structure_snp_limit) {
+  structure_keep_snps <- sort(sample(structure_keep_snps, params$structure_snp_limit))
+}
+
+vcf_structure <- vcf[structure_keep_snps, c(TRUE, sample_ids %in% structure_keep_samples)]
+popmap_structure <- popmap |>
+  filter(id %in% structure_keep_samples) |>
+  select(id, pop)
+
+gt_structure <- extract.gt(vcf_structure, element = "GT", as.numeric = FALSE)
+called_structure <- !is.na(gt_structure) & !gt_structure %in% c("./.", ".|.", ".")
+gt_structure_numeric <- gt_structure
+gt_structure_numeric[gt_structure_numeric %in% c("0/0")] <- "0"
+gt_structure_numeric[gt_structure_numeric %in% c("0/1", "1/0")] <- "1"
+gt_structure_numeric[gt_structure_numeric %in% c("1/1")] <- "2"
+alt_counts_structure <- rowSums(
+  matrix(as.numeric(gt_structure_numeric), nrow = nrow(gt_structure_numeric)),
+  na.rm = TRUE
+)
+alleles_called_structure <- 2 * rowSums(called_structure)
+mac_structure <- pmin(alt_counts_structure, alleles_called_structure - alt_counts_structure)
+vcf_structure <- vcf_structure[mac_structure >= 1, ]
+
+tibble(
+  metric = c("samples retained for structure diagnostics", "SNPs retained for structure diagnostics"),
+  value = c(length(structure_keep_samples), nrow(vcf_structure@fix))
+) |>
+  datatable(rownames = FALSE, options = list(dom = "t"))
+```
+
+```{r snpfiltr-pca, eval=params$run_structure_plots, fig.height=7}
+assess_missing_data_pca(
+  vcfR = vcf_structure,
+  popmap = popmap_structure,
+  thresholds = c(0.5, 0.7, 0.8),
+  clustering = TRUE
+)
+```
+
+```{r snpfiltr-tsne, eval=params$run_structure_plots, fig.height=7}
+assess_missing_data_tsne(
+  vcfR = vcf_structure,
+  popmap = popmap_structure,
+  thresholds = c(0.5, 0.7, 0.8),
+  perplexity = 10,
+  iterations = 1000,
+  initial_dims = 10,
+  clustering = TRUE
+)
+```
+
+# Practical Starting Points
+
+These are starting conditions to test in the next filtering round, not final prescriptions.
+
+```{r candidate-summary}
+candidate_summary <- tibble(
+  filter_axis = c(
+    "sample missingness",
+    "SNP missingness",
+    "genotype depth",
+    "genotype quality",
+    "mean SNP depth upper bound",
+    "allele balance for heterozygotes",
+    "biallelic SNPs",
+    "minor allele count",
+    "distance thinning for unlinked analyses"
+  ),
+  conservative_start = c(
+    "remove samples > 0.80 missing",
+    "retain SNPs <= 0.70 missing",
+    "DP >= 5",
+    "GQ >= 20 or 30",
+    "inspect 97.5th and 99th percentile cutoffs",
+    "0.25-0.75",
+    "retain biallelic only",
+    "MAC >= 1, then compare MAC >= 3",
+    "1000 bp if linkage-sensitive analysis is planned"
+  ),
+  why = c(
+    "many low-depth samples are visible and can dominate missingness",
+    "balances locus count against matrix completeness in this VCF",
+    "common RADseq lower bound for genotype-level confidence",
+    "GQ 30 is stricter; compare retained-call fraction before committing",
+    "very high-depth loci can reflect collapsed paralogs",
+    "SNPfiltR default and dDocent-style RADseq check",
+    "standard requirement for most downstream tools",
+    "MAC 1 removes invariant sites; MAC 3 reduces singleton-driven noise",
+    "reduces tightly linked SNPs while preserving many RADseq loci"
+  )
+)
+
+datatable(candidate_summary, rownames = FALSE, options = list(pageLength = 9, dom = "t"))
+```
+
+# Reproducibility
+
+```{r session-info}
+sessionInfo()
+```
