@@ -1,0 +1,2 @@
+source_vcf,filtered_vcf,source_sites,filtered_sites_mac1,source_samples,retained_samples,removed_samples,sample_missing_filter,site_filter
+VCF/Broussonetia_RADseq.07_tags_refilled.vcf.gz,VCF/filtered/Broussonetia_RADseq.08_missing60_mac1.vcf.gz,203548,121432,171,137,34,remove samples with missing_rate > 0.60,MAF > 0 after retaining samples; equivalent to MAC >= 1 for polymorphic sites

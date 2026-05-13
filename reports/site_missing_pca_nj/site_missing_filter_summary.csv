@@ -1,0 +1,5 @@
+site_missing_filter_percent,sites_retained,samples,genotype_missing_rate,pc1_percent,pc2_percent,filtered_vcf
+80,95035,134,0.115799834939052,13.909807967161,5.52860895682682,reports/site_missing_pca_nj/vcf/Broussonetia_RADseq.08_missing50_mac1_site_missing80.vcf.gz
+60,91342,134,0.0924688647585571,14.0902675787392,5.58846529387484,reports/site_missing_pca_nj/vcf/Broussonetia_RADseq.08_missing50_mac1_site_missing60.vcf.gz
+40,85137,134,0.063276941344232,14.4101822283574,5.66404905020663,reports/site_missing_pca_nj/vcf/Broussonetia_RADseq.08_missing50_mac1_site_missing40.vcf.gz
+20,75705,134,0.0352675891396988,14.8625090716031,5.7447598813974,reports/site_missing_pca_nj/vcf/Broussonetia_RADseq.08_missing50_mac1_site_missing20.vcf.gz
