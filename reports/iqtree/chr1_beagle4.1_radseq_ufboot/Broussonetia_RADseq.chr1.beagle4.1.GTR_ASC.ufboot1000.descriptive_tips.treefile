@@ -1,0 +1,241 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=137;
+	taxlabels
+	'Broussonetia kaempferi | China: Yongchun, Quanzhou, Fujian Province |  | SRR12425385'
+	'Broussonetia monoica | Taiwan: Fuxing District, Taoyuan City |  | SRR12425386'
+	'Broussonetia papyrifera | Chile: HangaOteo, Easter Island | cp17 | SRR12425506'
+	'Broussonetia papyrifera | Chile: RanoKau, Easter Island | gaby003 | SRR12425504'
+	'Broussonetia papyrifera | China: Boluo, Huizhou, Guangdong Province | cp01 | SRR12425534'
+	'Broussonetia papyrifera | China: Boluo, Huizhou, Guangdong Province | cp01 | SRR12425535'
+	'Broussonetia papyrifera | China: Deqing, Huzhou, Zhejiang Province | cp01 | SRR12425407'
+	'Broussonetia papyrifera | China: Disu, Duan, Guangxi Province | cp34 | SRR12425432'
+	'Broussonetia papyrifera | China: Donghai, Lianyungang, Jiangsu Province | cp47 | SRR12425408'
+	'Broussonetia papyrifera | China: Dongmiao, Duan, Guangxi Province | cp21 | SRR12425434'
+	'Broussonetia papyrifera | China: Dongyang, Jinhua, Zhejiang Province | cp01 | SRR12425429'
+	'Broussonetia papyrifera | China: Fangcheng, Fangchenggang, Guangxi Province | cp32 | SRR12425433'
+	'Broussonetia papyrifera | China: Fengze, Quanzhou, Fujian Province | CloseTocp01 | SRR12425442'
+	'Broussonetia papyrifera | China: Fujian Province Agriculture and Forestry University, Fuzhou, Fujian Province | cp01 | SRR12425414'
+	'Broussonetia papyrifera | China: Fujian Province Agriculture and Forestry University, Fuzhou, Fujian Province | cp01 | SRR12425415'
+	'Broussonetia papyrifera | China: Huicheng , Huizhou, Guangdong Province | cp21 | SRR12425533'
+	'Broussonetia papyrifera | China: Huicheng , Huizhou, Guangdong Province | cp26 | SRR12425529'
+	'Broussonetia papyrifera | China: Jiawang, Xuzhou, Zhejiang Province | cp29 | SRR12425400'
+	'Broussonetia papyrifera | China: Jinjiang, Quanzhou, Fujian Province | cp20 | SRR12425437'
+	'Broussonetia papyrifera | China: Jurong, Zhenjiang, Jiangsu Province | cp01 | SRR12425403'
+	'Broussonetia papyrifera | China: Liancheng, Longyan, Fujian Province | cp01 | SRR12425371'
+	'Broussonetia papyrifera | China: Liancheng, Longyan, Fujian Province | cp21 | SRR12425370'
+	'Broussonetia papyrifera | China: Liancheng, Longyan, Fujian Province | cp45 | SRR12425537'
+	'Broussonetia papyrifera | China: Liandu, Lishui, Zhejiang Province | cp22 | SRR12425427'
+	'Broussonetia papyrifera | China: Lianyun, Lianyungang, Zhejiang Province | cp01 | SRR12425401'
+	'Broussonetia papyrifera | China: Licheng, Quanzhou, Fujian Province | cp34 | SRR12425436'
+	'Broussonetia papyrifera | China: Lipu, Guilin, Guangxi Province | cp32 | SRR12425478'
+	'Broussonetia papyrifera | China: Longhai, Zhangzhou, Fujian Province | cp01 | SRR12425444'
+	'Broussonetia papyrifera | China: Longhai, Zhangzhou, Fujian Province | cp29 | SRR12425441'
+	'Broussonetia papyrifera | China: Longzhou, Chongzuo, Guangxi Province | cp34 | SRR12425525'
+	'Broussonetia papyrifera | China: Longzhou, Chongzuo, Guangxi Province | cp39 | SRR12425526'
+	'Broussonetia papyrifera | China: Mengyin, Linyi, Shandong Province | cp40 | SRR12425398'
+	'Broussonetia papyrifera | China: Nanlang, Zhongshan, Guangdong Province | cp21 | SRR12425532'
+	'Broussonetia papyrifera | China: Nanlang, Zhongshan, Guangdong Province | cp28 | SRR12425482'
+	'Broussonetia papyrifera | China: Peking University, Haidian, Beijing | CloseTocp40 | SRR12425396'
+	'Broussonetia papyrifera | China: Peking University, Haidian, Beijing | cp40 | SRR12425395'
+	'Broussonetia papyrifera | China: Pingle, Guilin, Guangxi Province | cp20 | SRR12425477'
+	'Broussonetia papyrifera | China: Shanghai Chenshan Botanical Garden, Songjiang, Shanghai City | CloseTocp01 | SRR12425404'
+	'Broussonetia papyrifera | China: Shanghai Chenshan Botanical Garden, Songjiang, Shanghai City | cp01 | SRR12425405'
+	'Broussonetia papyrifera | China: Siming, Xiamen, Fujian Province | cp01 | SRR12425445'
+	'Broussonetia papyrifera | China: Siming, Xiamen, Fujian Province | cp20 | SRR12425439'
+	'Broussonetia papyrifera | China: Siming, Xiamen, Fujian Province | cp40 | SRR12425440'
+	'Broussonetia papyrifera | China: White Horse Temple, Taian, Shandong Province | cp29 | SRR12425399'
+	'Broussonetia papyrifera | China: Wuzhishan, Hainan Province | cp20 | SRR12425476'
+	'Broussonetia papyrifera | China: Xiamen Botanical Garden, Xiamen, Fujian Province | cp22 | SRR12425412'
+	'Broussonetia papyrifera | China: Xiangcheng, Zhangzhou, Fujian Province | cp01 | SRR12425443'
+	'Broussonetia papyrifera | China: Xiangcheng, Zhangzhou, Fujian Province | cp20 | SRR12425438'
+	'Broussonetia papyrifera | China: Xianju, Taizhou, Zhejiang Province | cp01 | SRR12425428'
+	'Broussonetia papyrifera | China: Xianju, Taizhou, Zhejiang Province | cp28 | SRR12425430'
+	'Broussonetia papyrifera | China: Xianju, Taizhou, Zhejiang Province | cp28 | SRR12425431'
+	'Broussonetia papyrifera | China: Xihu, Hangzhou, Zhejiang Province | cp22 | SRR12425406'
+	'Broussonetia papyrifera | China: Xuanwu, Nanjing, Jiangsu Province | cp53 | SRR12425524'
+	'Broussonetia papyrifera | China: Yangshan, Qingyuan, Guangdong Province | cp31 | SRR12425481'
+	'Broussonetia papyrifera | China: Yanping District, Longyan, Fujian Province | cp29 | SRR12425492'
+	'Broussonetia papyrifera | China: Yanping, Nanping, Fujian Province | cp20 | SRR12425409'
+	'Broussonetia papyrifera | China: Yanping, Nanping, Fujian Province | cp20 | SRR12425536'
+	'Broussonetia papyrifera | China: Yuntai Mountain, Jiaozuo, Henan Province | cp40 | SRR12425397'
+	'Broussonetia papyrifera | Fiji: Ekubo, Vatulele | cp17 | SRR12425390'
+	'Broussonetia papyrifera | Fiji: Suva, Vitilevu | cp17 | SRR12425513'
+	'Broussonetia papyrifera | Fiji: Taveuni Island | cp17 | SRR12425511'
+	'Broussonetia papyrifera | Fiji: Taveuni Island | cp17B | SRR12425510'
+	'Broussonetia papyrifera | Fiji: VanuaLevu | cp17 | SRR12425512'
+	'Broussonetia papyrifera | French Polynesia: Ahurei, Rapa Iti | cp17 | SRR12425507'
+	'Broussonetia papyrifera | French Polynesia: Tahiti | cp17 | SRR12425509'
+	'Broussonetia papyrifera | French Polynesia: Tahiti | cp17B | SRR12425387'
+	'Broussonetia papyrifera | Indonesia: Lengkeka, Tengah, Sulawesi | cp17D | SRR12425463'
+	'Broussonetia papyrifera | Japan: Iriomote, Yaeyama, Okinawa | cp05B | SRR12425471'
+	'Broussonetia papyrifera | Japan: Ishigaki, Yaeyama, Okinawa | cp05B | SRR12425474'
+	'Broussonetia papyrifera | Japan: Kurima, Miyakojima, Okinawa | cp05B | SRR12425470'
+	'Broussonetia papyrifera | Japan: Taketomi, Yaeyama, Okinawa | cp05B | SRR12425473'
+	'Broussonetia papyrifera | Japan: The University of Tokyo, Bunkyo, Tokyo | cp28 | SRR12425393'
+	'Broussonetia papyrifera | Japan: The University of Tokyo, Bunkyo, Tokyo | cp28 | SRR12425394'
+	'Broussonetia papyrifera | Philippines: Los Banos, Laguna, Luzon | cp43 | SRR12425464'
+	'Broussonetia papyrifera | Samoa: Faleolo International Airpor, Faleolo, Upolu | cp17 | SRR12425389'
+	'Broussonetia papyrifera | Samoa: Palauli Siapo demostration, Palauli, Savaii | cp17 | SRR12425388'
+	'Broussonetia papyrifera | Taiwan: Bali District, Taipei City | CloseTocp01 | SRR12425402'
+	'Broussonetia papyrifera | Taiwan: Changbin Township, Taitung County | cp05 | SRR12425391'
+	'Broussonetia papyrifera | Taiwan: Chenggong Township, Taitung County | cp16 | SRR12425455'
+	'Broussonetia papyrifera | Taiwan: Dawu Township, Taitung County | cp16 | SRR12425375'
+	'Broussonetia papyrifera | Taiwan: Fangliao Township, Pingtung County | cp09 | SRR12425505'
+	'Broussonetia papyrifera | Taiwan: Fangliao Township, Pingtung County | cp13 | SRR12425472'
+	'Broussonetia papyrifera | Taiwan: Fangshan Township, Pingtung County | cp17 | SRR12425373'
+	'Broussonetia papyrifera | Taiwan: Fangshan Township, Pingtung County | cp17 | SRR12425452'
+	'Broussonetia papyrifera | Taiwan: Fengbin Township, Hualien County | cp01 | SRR12425425'
+	'Broussonetia papyrifera | Taiwan: Fenggang Township, Pingtung County | cp17 | SRR12425450'
+	'Broussonetia papyrifera | Taiwan: Fenggang Township, Pingtung County | p17 | SRR12425416'
+	'Broussonetia papyrifera | Taiwan: Fenglin Township, Hualien County | cp06 | SRR12425421'
+	'Broussonetia papyrifera | Taiwan: Fenglin Township, Hualien County | cp52 | SRR12425420'
+	'Broussonetia papyrifera | Taiwan: Fengyuan District, Taichung City | cp03 | SRR12425413'
+	'Broussonetia papyrifera | Taiwan: Fuli Township, Hualien County | cp05 | SRR12425422'
+	'Broussonetia papyrifera | Taiwan: Fuli Township, Hualien County | cp05 | SRR12425423'
+	'Broussonetia papyrifera | Taiwan: Guanshan Township, Taitung County | CloseTocp05 | SRR12425538'
+	'Broussonetia papyrifera | Taiwan: Guanshan Township, Taitung County | cp17 | SRR12425372'
+	'Broussonetia papyrifera | Taiwan: Hemei Township, Changhua County | cp50 | SRR12425448'
+	'Broussonetia papyrifera | Taiwan: Hengchun Township, Pingtung County | cp09 | SRR12425419'
+	'Broussonetia papyrifera | Taiwan: Hongtou, Lanyu Township, Taitung County | cp16 | SRR12425461'
+	'Broussonetia papyrifera | Taiwan: Hsinwu District, Taoyuan City | cp01 | SRR12425539'
+	'Broussonetia papyrifera | Taiwan: Hualien County, Hualien County | cp05 | SRR12425383'
+	'Broussonetia papyrifera | Taiwan: Hualien County, Hualien County | cp06 | SRR12425501'
+	'Broussonetia papyrifera | Taiwan: Kincheng, Kinmen County, Fujian Province | cp48 | SRR12425410'
+	'Broussonetia papyrifera | Taiwan: Liukuaicuo, Pingtung City, Pingtung County | cp16 | SRR12425459'
+	'Broussonetia papyrifera | Taiwan: Liukuaicuo, Pingtung City, Pingtung County | cp17 | SRR12425454'
+	'Broussonetia papyrifera | Taiwan: Luodong Township, Yilan County | cp01 | SRR12425462'
+	'Broussonetia papyrifera | Taiwan: Luye Township, Taitung County | cp05 | SRR12425384'
+	'Broussonetia papyrifera | Taiwan: Machu, Lianjiang County, Fujian Province | cp46 | SRR12425411'
+	'Broussonetia papyrifera | Taiwan: Manjhou Township, Pingtung County | cp17 | SRR12425449'
+	'Broussonetia papyrifera | Taiwan: Nan''ao Township, Yilan County | cp01 | SRR12425426'
+	'Broussonetia papyrifera | Taiwan: Nanhua District, Tainan City | cp54 | SRR12425447'
+	'Broussonetia papyrifera | Taiwan: Nantou City, Nantou County | cp01 | SRR12425435'
+	'Broussonetia papyrifera | Taiwan: National Chiayi University, East District, Chiayi City, Chiayi County | cp09 | SRR12425418'
+	'Broussonetia papyrifera | Taiwan: National Taiwan University, Zhongzheng, Taipei City | cp01 | SRR12425540'
+	'Broussonetia papyrifera | Taiwan: Pingtung City, Pingtung County | cp09 | SRR12425516'
+	'Broussonetia papyrifera | Taiwan: Pitou Township, Changhua County | cp13 | SRR12425483'
+	'Broussonetia papyrifera | Taiwan: Qingshui District, Taichung City | cp09 | SRR12425527'
+	'Broussonetia papyrifera | Taiwan: Qionglin Township, Hsinchu County | cp01 | SRR12425457'
+	'Broussonetia papyrifera | Taiwan: Ren''ai Township, Nantou County | cp09 | SRR12425379'
+	'Broussonetia papyrifera | Taiwan: Taibao Township, Chiayi County | cp11 | SRR12425378'
+	'Broussonetia papyrifera | Taiwan: Taitung City, Taitung County | cp05 | SRR12425380'
+	'Broussonetia papyrifera | Taiwan: Taitung City, Taitung County | cp16 | SRR12425456'
+	'Broussonetia papyrifera | Taiwan: Taiwu Township, Pingtung County | cp17 | SRR12425453'
+	'Broussonetia papyrifera | Taiwan: Tongluo Township, Miaoli County | cp01 | SRR12425424'
+	'Broussonetia papyrifera | Taiwan: Xincheng Township, Hualien County | cp06 | SRR12425382'
+	'Broussonetia papyrifera | Taiwan: Yanpu Township, Pingtung County | cp16 | SRR12425376'
+	'Broussonetia papyrifera | Taiwan: Yujing District, Tainan City | cp09 | SRR12425494'
+	'Broussonetia papyrifera | Taiwan: Yujing District, Tainan City | cp16 | SRR12425458'
+	'Broussonetia papyrifera | Taiwan: Zhunan Township, Miaoli County | cp01 | SRR12425446'
+	'Broussonetia papyrifera | Taiwan: Zuozhen District, Tainan City | cp16 | SRR12425417'
+	'Broussonetia papyrifera | Thailand: Nakhon Pathom, Bangkok | cp20 | SRR12425467'
+	'Broussonetia papyrifera | Tonga: Liahona, Tongatapu | cp17 | SRR12425460'
+	'Broussonetia papyrifera | Tonga: Mangia, Vava''u | cp17 | SRR12425514'
+	'Broussonetia papyrifera | Tonga: Nuku''alofa, Tongatapu | cp17 | SRR12425392'
+	'Broussonetia papyrifera | USA: Bishop Museum, Oahu, Hawaii | cp17 | SRR12425523'
+	'Broussonetia papyrifera | USA: Kohala, Lapakahi, Big Island, Hawaii | cp17 | SRR12425475'
+	'Broussonetia papyrifera | USA: Waimea Valley, Oahu, Hawaii | cp41 | SRR12425522'
+	'Broussonetia papyrifera | USA: Waimea, Big Island, Hawaii | cp41 | SRR12425521'
+	'Broussonetia papyrifera | Viet Nam: Chuong My, Ha Noi | cp35 | SRR12425520'
+	'Broussonetia papyrifera | Wallis and Futuna: Wallis | cp17 | SRR12425508'
+;
+end;
+
+begin trees;
+	tree tree_1 = [&R] ('Broussonetia papyrifera | China: Liancheng, Longyan, Fujian Province | cp21 | SRR12425370':0.0538142,(((('Broussonetia papyrifera | China: Liancheng, Longyan, Fujian Province | cp01 | SRR12425371':0.0417579,'Broussonetia papyrifera | China: Yangshan, Qingyuan, Guangdong Province | cp31 | SRR12425481':0.0385324)[&BS=100]:0.0139710,((((((((((((((((('Broussonetia papyrifera | Taiwan: Guanshan Township, Taitung County | cp17 | SRR12425372':0.0205388,'Broussonetia papyrifera | Taiwan: Guanshan Township, Taitung County | CloseTocp05 | SRR12425538':0.0218352)[&BS=100]:0.0100268,'Broussonetia papyrifera | Taiwan: Taitung City, Taitung County | cp05 | SRR12425380':0.0224126)[&BS=82]:0.00946209,('Broussonetia papyrifera | Taiwan: Luye Township, Taitung County | cp05 | SRR12425384':0.0203348,'Broussonetia papyrifera | Taiwan: Taitung City, Taitung County | cp16 | SRR12425456':0.0235913)[&BS=87]:0.00922650)[&BS=65]:0.00777768,(('Broussonetia papyrifera | Taiwan: Fuli Township, Hualien County | cp05 | SRR12425422':0.0222778,'Broussonetia papyrifera | Taiwan: Hongtou, Lanyu Township, Taitung County | cp16 | SRR12425461':0.0200961)[&BS=59]:0.00778727,'Broussonetia papyrifera | Taiwan: Chenggong Township, Taitung County | cp16 | SRR12425455':0.0228389)[&BS=64]:0.00793170)[&BS=68]:0.00619196,((('Broussonetia papyrifera | Taiwan: Hualien County, Hualien County | cp05 | SRR12425383':0.0208375,'Broussonetia papyrifera | Taiwan: Hualien County, Hualien County | cp06 | SRR12425501':0.0216717)[&BS=92]:0.00979188,('Broussonetia papyrifera | Taiwan: Fenglin Township, Hualien County | cp52 | SRR12425420':0.0223460,'Broussonetia papyrifera | Taiwan: Fenglin Township, Hualien County | cp06 | SRR12425421':0.0223727)[&BS=54]:0.00851233)[&BS=78]:0.0111055,(('Broussonetia papyrifera | Taiwan: Changbin Township, Taitung County | cp05 | SRR12425391':0.0221841,'Broussonetia papyrifera | Taiwan: Fuli Township, Hualien County | cp05 | SRR12425423':0.0233705)[&BS=81]:0.00700290,'Broussonetia papyrifera | Taiwan: Fengbin Township, Hualien County | cp01 | SRR12425425':0.0261705)[&BS=79]:0.00737131)[&BS=75]:0.00818927)[&BS=71]:0.00810788,((((('Broussonetia papyrifera | Taiwan: Fangshan Township, Pingtung County | cp17 | SRR12425373':0.0228945,'Broussonetia papyrifera | Taiwan: Fangshan Township, Pingtung County | cp17 | SRR12425452':0.0188872)[&BS=100]:0.0161803,((((('Broussonetia papyrifera | Taiwan: Yanpu Township, Pingtung County | cp16 | SRR12425376':0.0244933,'Broussonetia papyrifera | Taiwan: Fangliao Township, Pingtung County | cp13 | SRR12425472':0.0216758)[&BS=68]:0.00778668,'Broussonetia papyrifera | Taiwan: Liukuaicuo, Pingtung City, Pingtung County | cp16 | SRR12425459':0.0221452)[&BS=67]:0.00921606,((((('Broussonetia papyrifera | Taiwan: Taibao Township, Chiayi County | cp11 | SRR12425378':0.0225025,('Broussonetia papyrifera | Taiwan: Zuozhen District, Tainan City | cp16 | SRR12425417':0.0196809,'Broussonetia papyrifera | Taiwan: Nanhua District, Tainan City | cp54 | SRR12425447':0.0228983)[&BS=99]:0.00800742)[&BS=97]:0.00773051,('Broussonetia papyrifera | Taiwan: Nantou City, Nantou County | cp01 | SRR12425435':0.0212494,'Broussonetia papyrifera | Taiwan: Yujing District, Tainan City | cp09 | SRR12425494':0.0201808)[&BS=95]:0.0107245)[&BS=77]:0.00684739,((((((('Broussonetia papyrifera | Taiwan: Bali District, Taipei City | CloseTocp01 | SRR12425402':0.0227321,'Broussonetia papyrifera | Taiwan: National Taiwan University, Zhongzheng, Taipei City | cp01 | SRR12425540':0.0217985)[&BS=90]:0.0100137,'Broussonetia papyrifera | Taiwan: Hsinwu District, Taoyuan City | cp01 | SRR12425539':0.0231226)[&BS=85]:0.00768184,'Broussonetia papyrifera | Taiwan: Luodong Township, Yilan County | cp01 | SRR12425462':0.0384957)[&BS=97]:0.0100144,'Broussonetia papyrifera | Taiwan: Zhunan Township, Miaoli County | cp01 | SRR12425446':0.0315666)[&BS=41]:0.00712494,'Broussonetia papyrifera | Taiwan: Qionglin Township, Hsinchu County | cp01 | SRR12425457':0.0280821)[&BS=36]:0.00634699,('Broussonetia papyrifera | Taiwan: Tongluo Township, Miaoli County | cp01 | SRR12425424':0.0221670,'Broussonetia papyrifera | Taiwan: Qingshui District, Taichung City | cp09 | SRR12425527':0.0247521)[&BS=71]:0.0102032)[&BS=72]:0.00783681,('Broussonetia papyrifera | Taiwan: Fengyuan District, Taichung City | cp03 | SRR12425413':0.0220137,'Broussonetia papyrifera | Taiwan: Hemei Township, Changhua County | cp50 | SRR12425448':0.0217999)[&BS=70]:0.00976612)[&BS=63]:0.00830848)[&BS=55]:0.00671652,(('Broussonetia papyrifera | Taiwan: Ren''ai Township, Nantou County | cp09 | SRR12425379':0.0298706,'Broussonetia papyrifera | Taiwan: Yujing District, Tainan City | cp16 | SRR12425458':0.0205085)[&BS=58]:0.00820101,('Broussonetia papyrifera | Taiwan: National Chiayi University, East District, Chiayi City, Chiayi County | cp09 | SRR12425418':0.0227290,'Broussonetia papyrifera | Taiwan: Pitou Township, Changhua County | cp13 | SRR12425483':0.0195352)[&BS=63]:0.00824486)[&BS=69]:0.00822764)[&BS=80]:0.00822650,('Broussonetia papyrifera | Taiwan: Fangliao Township, Pingtung County | cp09 | SRR12425505':0.0249333,'Broussonetia papyrifera | Taiwan: Pingtung City, Pingtung County | cp09 | SRR12425516':0.0208706)[&BS=99]:0.00992181)[&BS=60]:0.00600494)[&BS=62]:0.00767589,('Broussonetia papyrifera | Taiwan: Taiwu Township, Pingtung County | cp17 | SRR12425453':0.0235426,'Broussonetia papyrifera | Taiwan: Liukuaicuo, Pingtung City, Pingtung County | cp17 | SRR12425454':0.0309800)[&BS=67]:0.00937810)[&BS=99]:0.0115682,'Broussonetia papyrifera | Taiwan: Hengchun Township, Pingtung County | cp09 | SRR12425419':0.0223159)[&BS=68]:0.0107153)[&BS=70]:0.00905853,'Broussonetia papyrifera | Taiwan: Fenggang Township, Pingtung County | cp17 | SRR12425450':0.0248775)[&BS=100]:0.0103653,'Broussonetia papyrifera | Taiwan: Fenggang Township, Pingtung County | p17 | SRR12425416':0.0254781)[&BS=80]:0.00966201,('Broussonetia papyrifera | Taiwan: Dawu Township, Taitung County | cp16 | SRR12425375':0.0197929,'Broussonetia papyrifera | Taiwan: Manjhou Township, Pingtung County | cp17 | SRR12425449':0.0217172)[&BS=77]:0.0102908)[&BS=77]:0.00913844)[&BS=75]:0.00879918,('Broussonetia papyrifera | Taiwan: Xincheng Township, Hualien County | cp06 | SRR12425382':0.0211194,'Broussonetia papyrifera | Taiwan: Nan''ao Township, Yilan County | cp01 | SRR12425426':0.0297196)[&BS=90]:0.0111238)[&BS=100]:0.0136624,(((((('Broussonetia papyrifera | French Polynesia: Tahiti | cp17B | SRR12425387':1.00000e-06,'Broussonetia papyrifera | Chile: HangaOteo, Easter Island | cp17 | SRR12425506':1.00000e-06)[&BS=86]:2.25610e-06,'Broussonetia papyrifera | Chile: RanoKau, Easter Island | gaby003 | SRR12425504':1.00000e-06)[&BS=99]:0.000226675,(((((((('Broussonetia papyrifera | Fiji: Ekubo, Vatulele | cp17 | SRR12425390':2.23400e-06,'Broussonetia papyrifera | Tonga: Nuku''alofa, Tongatapu | cp17 | SRR12425392':2.14340e-06)[&BS=77]:2.78550e-06,'Broussonetia papyrifera | Fiji: Suva, Vitilevu | cp17 | SRR12425513':1.00000e-06)[&BS=89]:0.000154875,'Broussonetia papyrifera | USA: Bishop Museum, Oahu, Hawaii | cp17 | SRR12425523':1.00000e-06)[&BS=74]:0.000129894,('Broussonetia papyrifera | Tonga: Liahona, Tongatapu | cp17 | SRR12425460':0.000223744,('Broussonetia papyrifera | Fiji: VanuaLevu | cp17 | SRR12425512':1.00000e-06,'Broussonetia papyrifera | Tonga: Mangia, Vava''u | cp17 | SRR12425514':1.00000e-06)[&BS=80]:2.75660e-06)[&BS=84]:0.000130959)[&BS=70]:0.000112147,'Broussonetia papyrifera | Indonesia: Lengkeka, Tengah, Sulawesi | cp17D | SRR12425463':2.54350e-06)[&BS=52]:2.05070e-06,'Broussonetia papyrifera | French Polynesia: Tahiti | cp17 | SRR12425509':1.00000e-06)[&BS=47]:2.49560e-06,'Broussonetia papyrifera | French Polynesia: Ahurei, Rapa Iti | cp17 | SRR12425507':1.00000e-06)[&BS=55]:0.000294729,'Broussonetia papyrifera | Fiji: Taveuni Island | cp17 | SRR12425511':2.68956e-05)[&BS=49]:2.78280e-06)[&BS=58]:5.93967e-05,(('Broussonetia papyrifera | Samoa: Palauli Siapo demostration, Palauli, Savaii | cp17 | SRR12425388':2.39110e-06,'Broussonetia papyrifera | Wallis and Futuna: Wallis | cp17 | SRR12425508':1.00000e-06)[&BS=60]:7.79431e-05,'Broussonetia papyrifera | Samoa: Faleolo International Airpor, Faleolo, Upolu | cp17 | SRR12425389':1.00000e-06)[&BS=44]:2.41700e-06)[&BS=64]:0.000137812,'Broussonetia papyrifera | USA: Kohala, Lapakahi, Big Island, Hawaii | cp17 | SRR12425475':4.52638e-05)[&BS=72]:2.81770e-06,'Broussonetia papyrifera | Fiji: Taveuni Island | cp17B | SRR12425510':1.00000e-06)[&BS=100]:0.0120310)[&BS=100]:0.0206331,((('Broussonetia papyrifera | Japan: Kurima, Miyakojima, Okinawa | cp05B | SRR12425470':0.0135472,'Broussonetia papyrifera | Japan: Iriomote, Yaeyama, Okinawa | cp05B | SRR12425471':0.0125416)[&BS=99]:0.00951005,'Broussonetia papyrifera | Japan: Ishigaki, Yaeyama, Okinawa | cp05B | SRR12425474':0.0152012)[&BS=99]:0.00788520,'Broussonetia papyrifera | Japan: Taketomi, Yaeyama, Okinawa | cp05B | SRR12425473':0.0109072)[&BS=100]:0.100542)[&BS=100]:0.0330192,('Broussonetia kaempferi | China: Yongchun, Quanzhou, Fujian Province |  | SRR12425385':0.0758539,'Broussonetia monoica | Taiwan: Fuxing District, Taoyuan City |  | SRR12425386':0.0897765)[&BS=100]:0.157938)[&BS=100]:0.0230293,(((((('Broussonetia papyrifera | Japan: The University of Tokyo, Bunkyo, Tokyo | cp28 | SRR12425393':0.00798519,'Broussonetia papyrifera | Japan: The University of Tokyo, Bunkyo, Tokyo | cp28 | SRR12425394':0.00899295)[&BS=100]:0.0989875,'Broussonetia papyrifera | China: Shanghai Chenshan Botanical Garden, Songjiang, Shanghai City | cp01 | SRR12425405':0.0316992)[&BS=100]:0.0152589,(((('Broussonetia papyrifera | China: Yanping, Nanping, Fujian Province | cp20 | SRR12425409':0.000174575,'Broussonetia papyrifera | China: Yanping, Nanping, Fujian Province | cp20 | SRR12425536':8.26580e-05)[&BS=100]:0.0394904,('Broussonetia papyrifera | China: Xiamen Botanical Garden, Xiamen, Fujian Province | cp22 | SRR12425412':0.0476126,('Broussonetia papyrifera | China: Fujian Province Agriculture and Forestry University, Fuzhou, Fujian Province | cp01 | SRR12425414':0.0361582,'Broussonetia papyrifera | China: Fujian Province Agriculture and Forestry University, Fuzhou, Fujian Province | cp01 | SRR12425415':0.0258524)[&BS=94]:0.0133775)[&BS=100]:0.0171641)[&BS=100]:0.0168335,('Broussonetia papyrifera | Taiwan: Kincheng, Kinmen County, Fujian Province | cp48 | SRR12425410':0.0525417,((('Broussonetia papyrifera | China: Licheng, Quanzhou, Fujian Province | cp34 | SRR12425436':0.0271981,'Broussonetia papyrifera | China: Jinjiang, Quanzhou, Fujian Province | cp20 | SRR12425437':0.0237950)[&BS=100]:0.0192301,'Broussonetia papyrifera | China: Fengze, Quanzhou, Fujian Province | CloseTocp01 | SRR12425442':0.0370406)[&BS=100]:0.0185313,(('Broussonetia papyrifera | China: Xiangcheng, Zhangzhou, Fujian Province | cp20 | SRR12425438':0.0125480,'Broussonetia papyrifera | China: Siming, Xiamen, Fujian Province | cp20 | SRR12425439':0.0210022)[&BS=100]:0.0184003,'Broussonetia papyrifera | China: Xiangcheng, Zhangzhou, Fujian Province | cp01 | SRR12425443':0.0259507)[&BS=100]:0.0446007)[&BS=98]:0.0136342)[&BS=100]:0.0152968)[&BS=100]:0.0137609,('Broussonetia papyrifera | Taiwan: Machu, Lianjiang County, Fujian Province | cp46 | SRR12425411':0.0326356,('Broussonetia papyrifera | China: Liandu, Lishui, Zhejiang Province | cp22 | SRR12425427':0.0435379,'Broussonetia papyrifera | China: Xianju, Taizhou, Zhejiang Province | cp01 | SRR12425428':0.0539082)[&BS=100]:0.0138650)[&BS=100]:0.0112737)[&BS=93]:0.0103432)[&BS=90]:0.00927688,((('Broussonetia papyrifera | China: Shanghai Chenshan Botanical Garden, Songjiang, Shanghai City | CloseTocp01 | SRR12425404':0.0312025,'Broussonetia papyrifera | China: Deqing, Huzhou, Zhejiang Province | cp01 | SRR12425407':0.0288165)[&BS=55]:0.0108617,('Broussonetia papyrifera | China: Dongyang, Jinhua, Zhejiang Province | cp01 | SRR12425429':0.0335173,'Broussonetia papyrifera | China: Longhai, Zhangzhou, Fujian Province | cp01 | SRR12425444':0.0333161)[&BS=56]:0.0107743)[&BS=99]:0.00918943,('Broussonetia papyrifera | China: Xihu, Hangzhou, Zhejiang Province | cp22 | SRR12425406':0.0309914,('Broussonetia papyrifera | China: Xianju, Taizhou, Zhejiang Province | cp28 | SRR12425430':2.10190e-06,'Broussonetia papyrifera | China: Xianju, Taizhou, Zhejiang Province | cp28 | SRR12425431':5.52386e-05)[&BS=100]:0.0318371)[&BS=100]:0.0124115)[&BS=95]:0.00835286)[&BS=100]:0.0134891,('Broussonetia papyrifera | China: Lianyun, Lianyungang, Zhejiang Province | cp01 | SRR12425401':0.0415995,'Broussonetia papyrifera | China: Xuanwu, Nanjing, Jiangsu Province | cp53 | SRR12425524':0.0348477)[&BS=56]:0.0103710)[&BS=56]:0.0107406,'Broussonetia papyrifera | China: Jurong, Zhenjiang, Jiangsu Province | cp01 | SRR12425403':0.0362350)[&BS=100]:0.0126667)[&BS=95]:0.0110531,('Broussonetia papyrifera | China: Donghai, Lianyungang, Jiangsu Province | cp47 | SRR12425408':0.0433470,'Broussonetia papyrifera | China: Longhai, Zhangzhou, Fujian Province | cp29 | SRR12425441':0.0356462)[&BS=98]:0.0115806)[&BS=95]:0.00972522,'Broussonetia papyrifera | China: Yanping District, Longyan, Fujian Province | cp29 | SRR12425492':0.0352721)[&BS=84]:0.00988520,(((('Broussonetia papyrifera | China: Peking University, Haidian, Beijing | cp40 | SRR12425395':0.0277560,'Broussonetia papyrifera | China: Peking University, Haidian, Beijing | CloseTocp40 | SRR12425396':0.0278718)[&BS=100]:0.0343298,'Broussonetia papyrifera | China: Yuntai Mountain, Jiaozuo, Henan Province | cp40 | SRR12425397':0.0407043)[&BS=100]:0.0218176,'Broussonetia papyrifera | China: Mengyin, Linyi, Shandong Province | cp40 | SRR12425398':0.0380344)[&BS=95]:0.0144820,('Broussonetia papyrifera | China: White Horse Temple, Taian, Shandong Province | cp29 | SRR12425399':0.0456925,'Broussonetia papyrifera | China: Jiawang, Xuzhou, Zhejiang Province | cp29 | SRR12425400':0.0418740)[&BS=82]:0.0107922)[&BS=100]:0.0173840)[&BS=96]:0.0127047,('Broussonetia papyrifera | China: Siming, Xiamen, Fujian Province | cp40 | SRR12425440':0.0332717,'Broussonetia papyrifera | China: Siming, Xiamen, Fujian Province | cp01 | SRR12425445':0.0205649)[&BS=100]:0.0260984)[&BS=100]:0.0118196,'Broussonetia papyrifera | China: Liancheng, Longyan, Fujian Province | cp45 | SRR12425537':0.0428777)[&BS=100]:0.0155050,'Broussonetia papyrifera | China: Nanlang, Zhongshan, Guangdong Province | cp28 | SRR12425482':0.0383824)[&BS=100]:0.0152571)[&BS=100]:0.0129409,((('Broussonetia papyrifera | China: Disu, Duan, Guangxi Province | cp34 | SRR12425432':0.0351180,'Broussonetia papyrifera | China: Dongmiao, Duan, Guangxi Province | cp21 | SRR12425434':0.0305217)[&BS=84]:0.0103547,((((('Broussonetia papyrifera | Philippines: Los Banos, Laguna, Luzon | cp43 | SRR12425464':0.0386279,'Broussonetia papyrifera | Thailand: Nakhon Pathom, Bangkok | cp20 | SRR12425467':0.0639632)[&BS=100]:0.0206959,'Broussonetia papyrifera | Viet Nam: Chuong My, Ha Noi | cp35 | SRR12425520':0.0398926)[&BS=100]:0.0224937,'Broussonetia papyrifera | China: Wuzhishan, Hainan Province | cp20 | SRR12425476':0.0665252)[&BS=96]:0.0141675,'Broussonetia papyrifera | China: Longzhou, Chongzuo, Guangxi Province | cp39 | SRR12425526':0.0349107)[&BS=80]:0.00919264,'Broussonetia papyrifera | China: Longzhou, Chongzuo, Guangxi Province | cp34 | SRR12425525':0.0363704)[&BS=87]:0.0124265)[&BS=100]:0.0181287,((('Broussonetia papyrifera | China: Fangcheng, Fangchenggang, Guangxi Province | cp32 | SRR12425433':0.0290324,('Broussonetia papyrifera | USA: Waimea, Big Island, Hawaii | cp41 | SRR12425521':0.0113449,'Broussonetia papyrifera | USA: Waimea Valley, Oahu, Hawaii | cp41 | SRR12425522':0.00360903)[&BS=100]:0.0507209)[&BS=100]:0.0210782,'Broussonetia papyrifera | China: Pingle, Guilin, Guangxi Province | cp20 | SRR12425477':0.0368779)[&BS=99]:0.0106170,'Broussonetia papyrifera | China: Lipu, Guilin, Guangxi Province | cp32 | SRR12425478':0.0422332)[&BS=100]:0.0130901)[&BS=100]:0.0135199)[&BS=100]:0.0206623,(('Broussonetia papyrifera | China: Huicheng , Huizhou, Guangdong Province | cp26 | SRR12425529':2.76214e-05,'Broussonetia papyrifera | China: Huicheng , Huizhou, Guangdong Province | cp21 | SRR12425533':5.69855e-05)[&BS=100]:0.0305298,('Broussonetia papyrifera | China: Boluo, Huizhou, Guangdong Province | cp01 | SRR12425534':0.0334256,'Broussonetia papyrifera | China: Boluo, Huizhou, Guangdong Province | cp01 | SRR12425535':0.0338085)[&BS=100]:0.0177202)[&BS=100]:0.0169279)[&BS=100]:0.0189709,'Broussonetia papyrifera | China: Nanlang, Zhongshan, Guangdong Province | cp21 | SRR12425532':0.0355075);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#ffffff;
+	set appearance.branchColorAttribute="User selection";
+	set appearance.branchColorGradient=false;
+	set appearance.branchLineWidth=1.0;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#000000;
+	set appearance.hilightingGradient=false;
+	set appearance.selectionColour=#2d3680;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName="sansserif";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=561;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute=null;
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="BS";
+	set nodeLabels.fontName="sansserif";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=true;
+	set nodeLabels.significantDigits=4;
+	set nodeShapeExternal.colourAttribute="User selection";
+	set nodeShapeExternal.isShown=false;
+	set nodeShapeExternal.minSize=10.0;
+	set nodeShapeExternal.scaleType=Width;
+	set nodeShapeExternal.shapeType=Circle;
+	set nodeShapeExternal.size=4.0;
+	set nodeShapeExternal.sizeAttribute="Fixed";
+	set nodeShapeInternal.colourAttribute="User selection";
+	set nodeShapeInternal.isShown=false;
+	set nodeShapeInternal.minSize=10.0;
+	set nodeShapeInternal.scaleType=Width;
+	set nodeShapeInternal.shapeType=Circle;
+	set nodeShapeInternal.size=4.0;
+	set nodeShapeInternal.sizeAttribute="Fixed";
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=8.0;
+	set scaleAxis.isShown=false;
+	set scaleAxis.lineWidth=1.0;
+	set scaleAxis.majorTicks=1.0;
+	set scaleAxis.minorTicks=0.5;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=true;
+	set scaleBar.fontSize=10.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=1.0;
+	set scaleBar.scaleRange=0.0;
+	set tipLabels.boxSize=4;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="Arial";
+	set tipLabels.fontSize=11;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set tipLabels.tipPath=true;
+	set trees.order=false;
+	set trees.orderType="increasing";
+	set trees.rooting=true;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+

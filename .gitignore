@@ -3,6 +3,9 @@
 # Local R package cache; packages are restored with install.packages().
 R_libs/
 
+# Local downloaded command-line tools.
+tools/
+
 # Large raw genomics files. Keep these locally or move to Git LFS/object storage.
 *.fa
 *.fasta
@@ -13,6 +16,8 @@ R_libs/
 *.pdf
 VCF/*.vcf
 VCF/*.vcf.gz
+reports/iqtree/**/*.vcf
+reports/iqtree/**/format_check.*
 
 # Keep lightweight indexes and generated analysis outputs versioned.
 !VCF/*.csi
